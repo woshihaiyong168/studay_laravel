@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -47,15 +48,25 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'captcha' => 'required|captcha',
+            //'captcha' => 'required|captcha',  captcha 验证码
+
+
+            'geetest_challenge' => 'required',  //极简 验证码
+            'geetest_validate'  => 'required',
+            'geetest_seccode'   => 'required',
+
         ],[
-            'captcha.required' => '验证码不能为空',
-            'captcha.captcha'  => '请输入正确的验证码',
+            //captcha错误返回
+            //'captcha.required' => '验证码不能为空',
+            //'captcha.captcha'  => '请输入正确的验证码',
+            'geetest' => config('laravel-geetest.server_fail_alert') //极简 验证规则
         ]);
+
     }
 
     /**

@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="media">
                         <div align="center">
-                            <img class="thumbnail img-responsive" src="https://iocaffcdn.phphub.org/uploads/avatars/1_1530614766.png!/both/200x200" width="300px" height="300px">
+                            <img class="thumbnail img-responsive" src="{{ $user->avatar }}" width="300px" height="300px">
                         </div>
                         <div class="media-body">
                             <hr>

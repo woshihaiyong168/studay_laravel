@@ -9,6 +9,7 @@ use App\Http\Requests\TopicRequest;
 use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
+use Illuminate\Support\Facades\Log;
 
 class TopicsController extends Controller
 {
@@ -46,6 +47,7 @@ class TopicsController extends Controller
     {
         $topic->fill($request->all());
         $topic->user_id = Auth::id();
+        Log::info($topic);
         $topic->save();
 
         return redirect()->route('topics.show', $topic->id)->with('message', '成功创建话题');

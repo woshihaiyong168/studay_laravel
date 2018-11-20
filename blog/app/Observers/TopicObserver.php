@@ -40,6 +40,7 @@ class TopicObserver
 
     public function deleted(Topic $topic)
     {
+        //$topic->replies()->delete(); 属于 Eloquent，就又会触发 deleted 事件，然后反复这样，程序就进入了死循环。
         \DB::table('replies')->where('topic_id', $topic->id)->delete();
     }
 }

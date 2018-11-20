@@ -15,6 +15,13 @@ class ReplyPolicy extends Policy
 
     public function destroy(User $user, Reply $reply)
     {
-        return true;
+        //$this->authorize('destroy', $reply);
+
+        return $user->isAuthorOf($reply) || $user->isAuthorOf($reply->topic);
+    }
+
+    public function deleted(Reply $reply)
+    {
+        $reply->topic->decrement('reply_count', 1);
     }
 }

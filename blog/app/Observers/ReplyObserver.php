@@ -11,11 +11,16 @@ class ReplyObserver
 {
     public function creating(Reply $reply)
     {
-        //
+        $reply->content = htmlspecialchars($reply->content);
     }
 
     public function updating(Reply $reply)
     {
         //
+    }
+
+    public function created(Reply $reply)
+    {
+        $reply->topic->increment('reply_count', 1);
     }
 }

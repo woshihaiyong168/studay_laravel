@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
 use App\Models\Topic;
 
 return [
@@ -16,7 +17,7 @@ return [
             'title'    => '话题',
             'sortable' => false,
             'output'   => function ($value, $model) {
-                return '<div style="max-width:260px">' . model_admin_link(e($model->topic->title), $model->topic) . '</div>';
+                return '<div style="max-width:260px">' . model_admin_link(e($model->title), $model) . '</div>';
             },
         ],
         'user' => [

@@ -10,11 +10,11 @@ class VerificationCodesController extends Controller
 {
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
+
         $phone = $request->phone;
-        if (!app()->environment('production')) {
+
+        if (app()->environment('production')) {
             echo app()->environment('production');
-            $code = '1234';
-            return $code;
         } else {
 
             // 生成4位随机数，左侧补0
@@ -22,7 +22,7 @@ class VerificationCodesController extends Controller
 
             try {
                 $result = $easySms -> send(17600153213, ['template' => '1',   //模板1
-                        'data' => [8888,  //code
+                        'data' => [$code,  //code
                             5    //5分钟
                         ],]);
             } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {

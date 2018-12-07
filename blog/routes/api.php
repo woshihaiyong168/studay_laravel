@@ -51,7 +51,7 @@ $api->version('v1', [
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')
             ->name('api.authorizations.destroy');
 
-        // 游客可以访问的接口
+        // 游客可以访问的接口  分类列表
         $api->get('categories', 'CategoriesController@index')
             ->name('api.categories.index');
 
@@ -68,6 +68,10 @@ $api->version('v1', [
             // 图片资源
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
+
+            // 发布话题
+            $api->post('topics', 'TopicsController@store')
+                ->name('api.topics.store');
         });
 
 
